@@ -31,6 +31,11 @@ Help:
 gitignoregh -h
 ```
 
+Version:
+```sh
+gitignoregh --version
+```
+
 List all gitignore templates:
 ```sh
 gitignoregh -l
@@ -44,6 +49,11 @@ gitignoregh -s
 Print a gitignore: 
 ```sh
 gitignoregh -p
+```
+
+Reset github template repository:
+```sh
+gitignoregh --reset
 ```
 
 Generate `.gitignore` file (accepts multiple arguments):
