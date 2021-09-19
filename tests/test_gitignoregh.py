@@ -60,7 +60,7 @@ class TestGitignore(unittest.TestCase):
 
         open_mock.assert_called_once_with(".gitignore", "w")
         open_mock.return_value.write.assert_called_once_with(
-            "# {}\n{}".format(self.gitignore.id, self.gitignore.text.strip())
+            "# >>> {}\n{}\n\n".format(self.gitignore.id, self.gitignore.text.strip())
         )
 
     @patch("builtins.open", new_callable=mock_open)
@@ -73,7 +73,7 @@ class TestGitignore(unittest.TestCase):
         self.gitignore.save(input_mock)
 
         input_mock.write.assert_called_once_with(
-            "# {}\n{}".format(self.gitignore.id, self.gitignore.text.strip())
+            "# >>> {}\n{}\n\n".format(self.gitignore.id, self.gitignore.text.strip())
         )
 
         open_mock.assert_not_called()

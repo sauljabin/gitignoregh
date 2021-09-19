@@ -125,7 +125,7 @@ class Gitignore:
             file.write(self.full_text())
 
     def full_text(self):
-        return "# {}\n{}".format(self.id, self.text.strip())
+        return "# >>> {}\n{}\n\n".format(self.id, self.text.strip())
 
     def __eq__(self, o):
         return self.id == o.id
