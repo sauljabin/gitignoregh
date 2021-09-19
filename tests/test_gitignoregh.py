@@ -62,6 +62,17 @@ class TestGitignore(unittest.TestCase):
             self.gitignore.text
         )
 
+    @patch("gitignoregh.gitignoregh.Console")
+    def test_scape_arguments_when_printing_license_text(self, console_class_mock):
+        self.gitignore.text = "text [arg1] [arg2]"
+
+        console_mock = MagicMock()
+        console_class_mock.return_value = console_mock
+
+        self.gitignore.print()
+
+        console_mock.print.assert_called_with(r"text \[arg1] \[arg2]")
+
 
 class TestGitignoregh(unittest.TestCase):
     def setUp(self):
