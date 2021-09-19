@@ -31,11 +31,14 @@ class Gitignoregh:
         self.print_gitignore_files(self.gitignore_files)
 
     def print_gitignore_by_id(self, gitignore_id):
-        gitignore_files = [
-            gitignore
-            for gitignore in self.gitignore_files
-            if gitignore_id.lower() == gitignore.id.lower()
-        ]
+        if len(gitignore_id) == 0:
+            gitignore_files = []
+        else:
+            gitignore_files = [
+                gitignore
+                for gitignore in self.gitignore_files
+                if gitignore_id[0].lower() == gitignore.id.lower()
+            ]
 
         if len(gitignore_files) == 0:
             console = Console()
@@ -48,7 +51,9 @@ class Gitignoregh:
         gitignore_files = [
             gitignore
             for gitignore in self.gitignore_files
-            if re.match(".*({}).*".format(gitignore_id).lower(), gitignore.id.lower())
+            if re.match(
+                ".*({}).*".format("|".join(gitignore_id)).lower(), gitignore.id.lower()
+            )
         ]
 
         if len(gitignore_files) == 0:
@@ -69,19 +74,21 @@ class Gitignoregh:
         )
         console.print(columns)
 
-    def save_gitignore_by_id(self, gitignore_id):
+    def save_gitignore_by_id(self, gitignore_list_id):
         gitignore_files = [
             gitignore
             for gitignore in self.gitignore_files
-            if gitignore_id.lower() == gitignore.id.lower()
+            if gitignore.id.lower() in [id.lower() for id in gitignore_list_id]
         ]
 
         if len(gitignore_files) == 0:
             console = Console()
             console.print("[red]Gitignore not found[red]")
         else:
-            gitignore_files[0].load()
-            gitignore_files[0].save()
+            with open(".gitignore", "w") as file:
+                for gitignore_file in gitignore_files:
+                    gitignore_file.load()
+                    gitignore_file.save(file)
 
     def reset_repository(self):
         self.repository.remove()
@@ -109,9 +116,16 @@ class Gitignore:
         console.rule()
         console.print(self.text.replace("[", r"\["))
 
-    def save(self):
+    def save(self, file_append=None):
+        if file_append:
+            file_append.write(self.full_text())
+            return
+
         with open(".gitignore", "w") as file:
-            file.write(self.text)
+            file.write(self.full_text())
+
+    def full_text(self):
+        return "# {}\n{}".format(self.id, self.text.strip())
 
     def __eq__(self, o):
         return self.id == o.id

@@ -52,15 +52,31 @@ class TestGitignore(unittest.TestCase):
         console_mock.print.assert_called_with(self.gitignore.text)
 
     @patch("builtins.open", new_callable=mock_open)
-    def test_save_gitignore_text(self, console_class_mock):
+    def test_save_gitignore_text(self, open_mock):
         self.gitignore.text = faker.text()
+        self.gitignore.id = faker.text()
 
         self.gitignore.save()
 
-        console_class_mock.assert_called_once_with(".gitignore", "w")
-        console_class_mock.return_value.write.assert_called_once_with(
-            self.gitignore.text
+        open_mock.assert_called_once_with(".gitignore", "w")
+        open_mock.return_value.write.assert_called_once_with(
+            "# {}\n{}".format(self.gitignore.id, self.gitignore.text.strip())
         )
+
+    @patch("builtins.open", new_callable=mock_open)
+    def test_append_gitignore_text(self, open_mock):
+        self.gitignore.text = faker.text()
+        self.gitignore.id = faker.text()
+        input_mock = MagicMock()
+        input_mock.write = MagicMock()
+
+        self.gitignore.save(input_mock)
+
+        input_mock.write.assert_called_once_with(
+            "# {}\n{}".format(self.gitignore.id, self.gitignore.text.strip())
+        )
+
+        open_mock.assert_not_called()
 
     @patch("gitignoregh.gitignoregh.Console")
     def test_scape_arguments_when_printing_license_text(self, console_class_mock):
@@ -122,7 +138,7 @@ class TestGitignoregh(unittest.TestCase):
 
         self.gitignoregh.print_gitignore_files = MagicMock()
 
-        self.gitignoregh.print_gitignore_files_by_id("spam")
+        self.gitignoregh.print_gitignore_files_by_id(["spam"])
 
         self.gitignoregh.print_gitignore_files.assert_called_once_with(
             [gitignore1, gitignore2]
@@ -135,7 +151,7 @@ class TestGitignoregh(unittest.TestCase):
         console_mock = MagicMock()
         console_class_mock.return_value = console_mock
 
-        self.gitignoregh.print_gitignore_files_by_id(faker.word())
+        self.gitignoregh.print_gitignore_files_by_id([faker.word()])
 
         console_mock.print.assert_called_once_with(
             "[red]Gitignore files not found[red]"
@@ -152,7 +168,7 @@ class TestGitignoregh(unittest.TestCase):
             Gitignore("/foo/bar/spam-2.0.gitignore"),
         ]
 
-        self.gitignoregh.print_gitignore_by_id("spam")
+        self.gitignoregh.print_gitignore_by_id(["spam"])
 
         gitignore1.load.assert_called_once()
         gitignore1.print.assert_called_once()
@@ -168,7 +184,7 @@ class TestGitignoregh(unittest.TestCase):
             Gitignore("/foo/bar/spam-2.0.gitignore"),
         ]
 
-        self.gitignoregh.print_gitignore_by_id("spam")
+        self.gitignoregh.print_gitignore_by_id(["spam"])
 
         gitignore1.load.assert_called_once()
         gitignore1.print.assert_called_once()
@@ -180,7 +196,7 @@ class TestGitignoregh(unittest.TestCase):
         console_mock = MagicMock()
         console_class_mock.return_value = console_mock
 
-        self.gitignoregh.print_gitignore_by_id(faker.word())
+        self.gitignoregh.print_gitignore_by_id([faker.word()])
 
         console_mock.print.assert_called_once_with("[red]Gitignore not found[red]")
 
@@ -218,23 +234,23 @@ class TestGitignoregh(unittest.TestCase):
         )
         console_mock.print.assert_called_once_with(columns_mock)
 
-    def test_save_gitignore_by_id(self):
-        gitignore = MagicMock()
+    @patch("builtins.open", new_callable=mock_open)
+    def test_save_gitignore_by_id(self, open_mock):
+        gitignore1 = MagicMock()
+        gitignore1.id = "spam1"
+        gitignore1.save = MagicMock()
 
-        self.gitignoregh.gitignore_files = [gitignore]
+        gitignore2 = MagicMock()
+        gitignore2.id = "SPAM2"
+        gitignore2.save = MagicMock()
 
-        self.gitignoregh.save_gitignore_by_id(gitignore.id)
+        self.gitignoregh.gitignore_files = [gitignore1, gitignore2]
 
-        gitignore.save.assert_called_once()
+        self.gitignoregh.save_gitignore_by_id(["spam1", "spam2"])
 
-    def test_save_gitignore_by_id_lowercase(self):
-        gitignore = MagicMock()
-        gitignore.id = "TEST"
-        self.gitignoregh.gitignore_files = [gitignore]
-
-        self.gitignoregh.save_gitignore_by_id(gitignore.id.lower())
-
-        gitignore.save.assert_called_once()
+        open_mock.assert_called_once_with(".gitignore", "w")
+        gitignore1.save.assert_called_once_with(open_mock.return_value)
+        gitignore2.save.assert_called_once_with(open_mock.return_value)
 
     @patch("gitignoregh.gitignoregh.Console")
     def test_print_gitignore_not_found_when_save(self, console_class_mock):
@@ -243,7 +259,7 @@ class TestGitignoregh(unittest.TestCase):
         console_mock = MagicMock()
         console_class_mock.return_value = console_mock
 
-        self.gitignoregh.save_gitignore_by_id(faker.word())
+        self.gitignoregh.save_gitignore_by_id([faker.word()])
 
         console_mock.print.assert_called_once_with("[red]Gitignore not found[red]")
 

@@ -8,7 +8,7 @@ class Cli:
     def __init__(self):
         self.gitignoregh = Gitignoregh()
 
-    def run(self, print, search, list, reset, gitignore_id):
+    def run(self, print, search, list, reset, gitignore_ids):
         if reset:
             self.gitignoregh.reset_repository()
             return
@@ -20,15 +20,15 @@ class Cli:
             return
 
         if search:
-            self.gitignoregh.print_gitignore_files_by_id(gitignore_id)
+            self.gitignoregh.print_gitignore_files_by_id(gitignore_ids)
             return
 
         if print:
-            self.gitignoregh.print_gitignore_by_id(gitignore_id)
+            self.gitignoregh.print_gitignore_by_id(gitignore_ids)
             return
 
-        if gitignore_id:
-            self.gitignoregh.save_gitignore_by_id(gitignore_id)
+        if gitignore_ids:
+            self.gitignoregh.save_gitignore_by_id(gitignore_ids)
             return
 
         with click.get_current_context() as context:
@@ -43,10 +43,10 @@ class Cli:
 @click.option("--list", "-l", is_flag=True, help="List all found gitignore templates.")
 @click.option("--reset", is_flag=True, help="Reset the template source.")
 @click.version_option(__version__)
-@click.argument("gitignore_id", metavar="<gitignore id>", nargs=1, required=False)
-def main(print, search, list, reset, gitignore_id):
+@click.argument("gitignore_ids", metavar="<gitignore ids>", nargs=-1, required=False)
+def main(print, search, list, reset, gitignore_ids):
     cli = Cli()
-    cli.run(print, search, list, reset, gitignore_id)
+    cli.run(print, search, list, reset, gitignore_ids)
 
 
 if __name__ == "__main__":
