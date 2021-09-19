@@ -79,7 +79,11 @@ class TestGitignoregh(unittest.TestCase):
     def test_it_loads_all_template_list_when_init(self, walk_mock):
         walk_mock.return_value = [
             ("/foo", ["bar"], ["baz.gitignore"]),
-            ("/foo/bar", [], ["spam.gitignore", "eggs.gitignore", "eggs.txt", faker.file_name()]),
+            (
+                "/foo/bar",
+                [],
+                ["spam.gitignore", "eggs.gitignore", "eggs.txt", faker.file_name()],
+            ),
         ]
 
         self.gitignoregh.init()
@@ -180,23 +184,26 @@ class TestGitignoregh(unittest.TestCase):
         )
 
     @patch("gitignoregh.gitignoregh.Console")
-    @patch("gitignoregh.gitignoregh.Table")
-    def test_it_prints_table(self, table_class_mock, console_class_mock):
-        table_mock = MagicMock()
-        table_class_mock.return_value = table_mock
+    @patch("gitignoregh.gitignoregh.Columns")
+    def test_it_prints_table(self, columns_class_mock, console_class_mock):
+        columns_mock = MagicMock()
+        columns_class_mock.return_value = columns_mock
+
+        console_mock = MagicMock()
+        console_class_mock.return_value = console_mock
 
         gitignore1 = MagicMock()
         gitignore1.id = faker.word()
-
         gitignore2 = MagicMock()
         gitignore2.id = faker.word()
-
         gitignore_files = [gitignore1, gitignore2]
 
         self.gitignoregh.print_gitignore_files(gitignore_files)
 
-        expected = [call(gitignore1.id), call(gitignore2.id)]
-        self.assertEqual(table_mock.add_row.call_args_list, expected)
+        columns_class_mock.assert_called_with(
+            [gitignore1.id, gitignore2.id], equal=True, expand=True
+        )
+        console_mock.print.assert_called_once_with(columns_mock)
 
     def test_save_gitignore_by_id(self):
         gitignore = MagicMock()

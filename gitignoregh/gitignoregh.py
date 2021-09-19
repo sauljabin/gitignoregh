@@ -2,9 +2,8 @@ import os
 import re
 
 import git
-from rich import box
+from rich.columns import Columns
 from rich.console import Console
-from rich.table import Table
 
 
 class Gitignoregh:
@@ -18,7 +17,9 @@ class Gitignoregh:
 
     def load_gitignore_files(self):
         for dirpath, dirnames, filenames in os.walk(self.repository.path):
-            filenames = [filename for filename in filenames if filename.endswith(".gitignore")]
+            filenames = [
+                filename for filename in filenames if filename.endswith(".gitignore")
+            ]
             filenames.sort()
             for gitignore_path in filenames:
                 self.gitignore_files.append(
@@ -57,14 +58,10 @@ class Gitignoregh:
 
     def print_gitignore_files(self, gitignore_files):
         console = Console()
-
-        table = Table(box=box.HORIZONTALS)
-        table.add_column("Id", style="cyan", justify="right")
-
-        for gitignore in gitignore_files:
-            table.add_row(gitignore.id)
-
-        console.print(table)
+        columns = Columns(
+            [gitignore.id for gitignore in gitignore_files], equal=True, expand=True
+        )
+        console.print(columns)
 
     def save_gitignore_by_id(self, gitignore_id):
         gitignore_files = [
@@ -109,6 +106,9 @@ class Gitignore:
 
     def __eq__(self, o):
         return self.id == o.id
+
+    def __hash__(self):
+        return self.id
 
 
 class TemplatesRepository:
