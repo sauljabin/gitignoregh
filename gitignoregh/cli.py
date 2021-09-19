@@ -45,6 +45,10 @@ class Cli:
 @click.version_option(__version__)
 @click.argument("gitignore_ids", metavar="<gitignore ids>", nargs=-1, required=False)
 def main(print, search, list, reset, gitignore_ids):
+    """
+    gitignoregh is a CLI tool to search and generate gitignore file templates.
+    Example: gitignoregh java gradle.
+    """
     cli = Cli()
     cli.run(print, search, list, reset, gitignore_ids)
 
