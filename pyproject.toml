@@ -31,7 +31,7 @@ tox = "^3.24.4"
 unittest = "^0.0"
 Faker = "^8.13.2"
 tox-gh-actions = "^2.7.0"
-coverage = "^5.5"
+coverage = {extras = ["toml"], version = "^5.5"}
 pyproject-flake8 = "^0.0.1-alpha.2"
 
 [build-system]
@@ -65,6 +65,14 @@ profile = "black"
 max-line-length = 88
 extend-ignore = "E203,"
 max-complexity = 10
+
+[tool.coverage.run]
+source = ["gitignoregh"]
+branch = true
+omit = ["*tests/*", "*scripts/*", "*__init__.py", "gitignoregh/__main__.py"]
+
+[tool.coverage.report]
+exclude_lines = ['if __name__ == "__main__":']
 
 [tool.poetry.scripts]
 gitignoregh = "gitignoregh.cli:main"

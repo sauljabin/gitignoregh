@@ -263,6 +263,17 @@ class TestGitignoregh(unittest.TestCase):
 
         console_mock.print.assert_called_once_with("[red]Gitignore not found[red]")
 
+    @patch("gitignoregh.gitignoregh.Console")
+    def test_print_gitignore_not_found_if_empty_when_save(self, console_class_mock):
+        self.gitignoregh.gitignore_files = [MagicMock()]
+
+        console_mock = MagicMock()
+        console_class_mock.return_value = console_mock
+
+        self.gitignoregh.print_gitignore_by_id([])
+
+        console_mock.print.assert_called_once_with("[red]Gitignore not found[red]")
+
     def test_remove_repository(self):
         self.gitignoregh.reset_repository()
 

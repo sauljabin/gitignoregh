@@ -10,8 +10,6 @@ def main():
             "run",
             "coverage",
             "run",
-            "--source",
-            "gitignoregh",
             "-m",
             "unittest",
             "-v",

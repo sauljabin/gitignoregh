@@ -30,14 +30,14 @@ class Gitignoregh:
     def print_all_gitignore_files(self):
         self.print_gitignore_files(self.gitignore_files)
 
-    def print_gitignore_by_id(self, gitignore_id):
-        if len(gitignore_id) == 0:
+    def print_gitignore_by_id(self, gitignore_id_list):
+        if len(gitignore_id_list) == 0:
             gitignore_files = []
         else:
             gitignore_files = [
                 gitignore
                 for gitignore in self.gitignore_files
-                if gitignore_id[0].lower() == gitignore.id.lower()
+                if gitignore_id_list[0].lower() == gitignore.id.lower()
             ]
 
         if len(gitignore_files) == 0:
@@ -47,12 +47,12 @@ class Gitignoregh:
             gitignore_files[0].load()
             gitignore_files[0].print()
 
-    def print_gitignore_files_by_id(self, gitignore_id):
+    def print_gitignore_files_by_id(self, gitignore_id_list):
         gitignore_files = [
             gitignore
             for gitignore in self.gitignore_files
             if re.match(
-                ".*({}).*".format("|".join(gitignore_id)).lower(), gitignore.id.lower()
+                ".*({}).*".format("|".join(gitignore_id_list)).lower(), gitignore.id.lower()
             )
         ]
 
@@ -74,11 +74,11 @@ class Gitignoregh:
         )
         console.print(columns)
 
-    def save_gitignore_by_id(self, gitignore_list_id):
+    def save_gitignore_by_id(self, gitignore_id_list):
         gitignore_files = [
             gitignore
             for gitignore in self.gitignore_files
-            if gitignore.id.lower() in [id.lower() for id in gitignore_list_id]
+            if gitignore.id.lower() in [id.lower() for id in gitignore_id_list]
         ]
 
         if len(gitignore_files) == 0:
@@ -129,10 +129,6 @@ class Gitignore:
 
     def __eq__(self, o):
         return self.id == o.id
-
-    def __hash__(self):
-        return self.id
-
 
 class TemplatesRepository:
     def __init__(self):
