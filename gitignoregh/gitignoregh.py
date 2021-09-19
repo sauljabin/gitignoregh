@@ -52,7 +52,8 @@ class Gitignoregh:
             gitignore
             for gitignore in self.gitignore_files
             if re.match(
-                ".*({}).*".format("|".join(gitignore_id_list)).lower(), gitignore.id.lower()
+                ".*({}).*".format("|".join(gitignore_id_list)).lower(),
+                gitignore.id.lower(),
             )
         ]
 
@@ -129,6 +130,7 @@ class Gitignore:
 
     def __eq__(self, o):
         return self.id == o.id
+
 
 class TemplatesRepository:
     def __init__(self):
