@@ -1,6 +1,6 @@
 import os
 import unittest
-from unittest.mock import MagicMock, call, mock_open, patch
+from unittest.mock import MagicMock, mock_open, patch
 
 from faker import Faker
 
@@ -201,7 +201,9 @@ class TestGitignoregh(unittest.TestCase):
         self.gitignoregh.print_gitignore_files(gitignore_files)
 
         columns_class_mock.assert_called_with(
-            [gitignore1.id, gitignore2.id], equal=True, expand=True
+            [":arrow_forward: " + gitignore1.id, ":arrow_forward: " + gitignore2.id],
+            equal=True,
+            expand=False,
         )
         console_mock.print.assert_called_once_with(columns_mock)
 
@@ -233,6 +235,11 @@ class TestGitignoregh(unittest.TestCase):
         self.gitignoregh.save_gitignore_by_id(faker.word())
 
         console_mock.print.assert_called_once_with("[red]Gitignore not found[red]")
+
+    def test_remove_repository(self):
+        self.gitignoregh.reset_repository()
+
+        self.gitignoregh.repository.remove.assert_called_once()
 
 
 class TestTemplateRepository(unittest.TestCase):
@@ -273,3 +280,9 @@ class TestTemplateRepository(unittest.TestCase):
         self.templates_repository.init()
 
         repo_mock.remotes.origin.pull.assert_called()
+
+    @patch("gitignoregh.gitignoregh.shutil")
+    def test_remove_repository(self, shutil_mock):
+        self.templates_repository.remove()
+
+        shutil_mock.rmtree.assert_called_with(self.path)

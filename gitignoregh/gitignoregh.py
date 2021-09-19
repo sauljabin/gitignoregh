@@ -1,5 +1,6 @@
 import os
 import re
+import shutil
 
 import git
 from rich.columns import Columns
@@ -59,7 +60,12 @@ class Gitignoregh:
     def print_gitignore_files(self, gitignore_files):
         console = Console()
         columns = Columns(
-            [gitignore.id for gitignore in gitignore_files], equal=True, expand=True
+            [
+                ":arrow_forward: {}".format(gitignore.id)
+                for gitignore in gitignore_files
+            ],
+            equal=True,
+            expand=False,
         )
         console.print(columns)
 
@@ -76,6 +82,9 @@ class Gitignoregh:
         else:
             gitignore_files[0].load()
             gitignore_files[0].save()
+
+    def reset_repository(self):
+        self.repository.remove()
 
 
 class Gitignore:
@@ -122,3 +131,6 @@ class TemplatesRepository:
             repo.remotes.origin.pull()
         else:
             git.Repo.clone_from(self.remote, self.path)
+
+    def remove(self):
+        shutil.rmtree(self.path)

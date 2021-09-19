@@ -331,7 +331,7 @@ six = ">=1.5"
 name = "pyyaml"
 version = "5.4.1"
 description = "YAML parser and emitter for Python"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*"
 
@@ -508,7 +508,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "25a02c9131b63720024b7bd5da99cf369b141316914f69f5e886c1817ad9c800"
+content-hash = "4220e48c81e82e776e1bf70578fc07b3bc0673694d84eb93573625b97e532529"
 
 [metadata.files]
 "backports.entry-points-selectable" = [

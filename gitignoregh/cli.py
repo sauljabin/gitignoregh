@@ -8,7 +8,11 @@ class Cli:
     def __init__(self):
         self.gitignoregh = Gitignoregh()
 
-    def run(self, print, search, list, gitignore_id):
+    def run(self, print, search, list, reset, gitignore_id):
+        if reset:
+            self.gitignoregh.reset_repository()
+            return
+
         self.gitignoregh.init()
 
         if list:
@@ -37,11 +41,12 @@ class Cli:
     "--search", "-s", is_flag=True, help="Search gitignore templates and shows a list."
 )
 @click.option("--list", "-l", is_flag=True, help="List all found gitignore templates.")
+@click.option("--reset", is_flag=True, help="Reset the template source.")
 @click.version_option(__version__)
 @click.argument("gitignore_id", metavar="<gitignore id>", nargs=1, required=False)
-def main(print, search, list, gitignore_id):
+def main(print, search, list, reset, gitignore_id):
     cli = Cli()
-    cli.run(print, search, list, gitignore_id)
+    cli.run(print, search, list, reset, gitignore_id)
 
 
 if __name__ == "__main__":
