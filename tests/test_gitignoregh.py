@@ -109,7 +109,7 @@ class TestGitignoregh(unittest.TestCase):
             (
                 "/foo/bar",
                 [],
-                ["spam.gitignore", "eggs.gitignore", "eggs.txt", faker.file_name()],
+                ["spam.gitignore", "eggs.gitignore", "eggs.txt", "test.json"],
             ),
         ]
 
