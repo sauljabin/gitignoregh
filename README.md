@@ -1,5 +1,8 @@
 # gitignoregh
 
+<a href="https://www.python.org/"><img alt="Python" src="https://img.shields.io/badge/-python-success?logo=python&logoColor=white"></a>
+<a href="https://github.com/sauljabin/gitignoregh"><img alt="GitHub" src="https://img.shields.io/badge/status-active-brightgreen"></a>
+<a href="https://github.com/sauljabin/gitignoregh"><img alt="GitHub" src="https://badges.pufler.dev/updated/sauljabin/gitignoregh?label=updated"></a>
 <a href="https://github.com/sauljabin/gitignoregh/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/sauljabin/gitignoregh"></a>
 <a href="https://github.com/sauljabin/gitignoregh/actions"><img alt="GitHub Actions" src="https://img.shields.io/github/checks-status/sauljabin/gitignoregh/main?label=tests"></a>
 <a href="https://app.codecov.io/gh/sauljabin/gitignoregh"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/sauljabin/gitignoregh"></a>
