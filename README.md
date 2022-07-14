@@ -80,9 +80,7 @@ Running unit tests:
 poetry run python -m scripts.tests
 ```
 
-Running multi version tests (`3.7`, `3.8`, `3.9`):
-
-> Make sure you have `python3.7`, `python3.8`, `python3.9` aliases installed
+Running multi version tests:
 
 ```sh
 poetry run python -m scripts.multi-version-tests
