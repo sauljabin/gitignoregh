@@ -42,7 +42,7 @@ class Gitignoregh:
 
         if len(gitignore_files) == 0:
             console = Console()
-            console.print("[red]Gitignore not found[red]")
+            console.print("[red]Gitignore not found[/]")
         else:
             gitignore_files[0].load()
             gitignore_files[0].print()
@@ -59,7 +59,7 @@ class Gitignoregh:
 
         if len(gitignore_files) == 0:
             console = Console()
-            console.print("[red]Gitignore files not found[red]")
+            console.print("[red]Gitignore files not found[/]")
         else:
             self.print_gitignore_files(gitignore_files)
 
@@ -67,7 +67,7 @@ class Gitignoregh:
         console = Console()
         columns = Columns(
             [
-                ":arrow_forward: {}".format(gitignore.id)
+                "[purple]:arrow_forward:[/] {}".format(gitignore.id)
                 for gitignore in gitignore_files
             ],
             equal=True,
@@ -84,7 +84,7 @@ class Gitignoregh:
 
         if len(gitignore_files) == 0:
             console = Console()
-            console.print("[red]Gitignore not found[red]")
+            console.print("[red]Gitignore not found[/]")
         else:
             with open(".gitignore", "w") as file:
                 for gitignore_file in gitignore_files:
@@ -108,12 +108,8 @@ class Gitignore:
 
     def print(self):
         console = Console()
-        console.print(
-            "[green]Name:[green]\t[magenta bold]{}[magenta bold]".format(self.file_name)
-        )
-        console.print(
-            "[green]Id:[green]\t[magenta bold]{}[magenta bold]".format(self.id)
-        )
+        console.print("[green]Name:[/]\t[magenta bold]{}[/]".format(self.file_name))
+        console.print("[green]Id:[/]\t[magenta bold]{}[/]".format(self.id))
         console.rule()
         console.print(self.text.replace("[", r"\["))
 

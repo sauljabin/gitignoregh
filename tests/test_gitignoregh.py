@@ -153,9 +153,7 @@ class TestGitignoregh(unittest.TestCase):
 
         self.gitignoregh.print_gitignore_files_by_id([faker.word()])
 
-        console_mock.print.assert_called_once_with(
-            "[red]Gitignore files not found[red]"
-        )
+        console_mock.print.assert_called_once_with("[red]Gitignore files not found[/]")
 
     def test_print_gitignore_by_id(self):
         gitignore1 = MagicMock()
@@ -198,7 +196,7 @@ class TestGitignoregh(unittest.TestCase):
 
         self.gitignoregh.print_gitignore_by_id([faker.word()])
 
-        console_mock.print.assert_called_once_with("[red]Gitignore not found[red]")
+        console_mock.print.assert_called_once_with("[red]Gitignore not found[/]")
 
     def test_print_all_gitignore_files(self):
         self.gitignoregh.gitignore_files = MagicMock()
@@ -228,7 +226,10 @@ class TestGitignoregh(unittest.TestCase):
         self.gitignoregh.print_gitignore_files(gitignore_files)
 
         columns_class_mock.assert_called_with(
-            [":arrow_forward: " + gitignore1.id, ":arrow_forward: " + gitignore2.id],
+            [
+                "[purple]:arrow_forward:[/] " + gitignore1.id,
+                "[purple]:arrow_forward:[/] " + gitignore2.id,
+            ],
             equal=True,
             expand=False,
         )
@@ -261,7 +262,7 @@ class TestGitignoregh(unittest.TestCase):
 
         self.gitignoregh.save_gitignore_by_id([faker.word()])
 
-        console_mock.print.assert_called_once_with("[red]Gitignore not found[red]")
+        console_mock.print.assert_called_once_with("[red]Gitignore not found[/]")
 
     @patch("gitignoregh.gitignoregh.Console")
     def test_print_gitignore_not_found_if_empty_when_save(self, console_class_mock):
@@ -272,7 +273,7 @@ class TestGitignoregh(unittest.TestCase):
 
         self.gitignoregh.print_gitignore_by_id([])
 
-        console_mock.print.assert_called_once_with("[red]Gitignore not found[red]")
+        console_mock.print.assert_called_once_with("[red]Gitignore not found[/]")
 
     def test_remove_repository(self):
         self.gitignoregh.reset_repository()
