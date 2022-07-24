@@ -80,12 +80,6 @@ Running unit tests:
 poetry run python -m scripts.tests
 ```
 
-Running multi version tests:
-
-```sh
-poetry run python -m scripts.multi-version-tests
-```
-
 Applying code styles:
 ```sh
 poetry run python -m scripts.styles
