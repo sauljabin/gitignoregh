@@ -21,14 +21,14 @@ Install with pip:
 pip install gitignoregh
 ```
 
-> Alias: `gigh`
-
 Upgrade with pip:
 ```sh
 pip install --upgrade gitignoregh
 ```
 
 ## Usage
+
+> Alias: `gigh`
 
 Help:
 ```sh
