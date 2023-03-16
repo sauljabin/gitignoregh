@@ -10,7 +10,7 @@ def main():
     isort = subprocess.run(["poetry", "run", "isort", "--check", "."])
 
     print(">>> flake8", flush=True)
-    flake8 = subprocess.run(["poetry", "run", "pflake8", "."])
+    flake8 = subprocess.run(["poetry", "run", "flake8", "."])
 
     print(">>> bandit", flush=True)
     bandit = subprocess.run(["poetry", "run", "bandit", "-r", "gitignoregh/"])

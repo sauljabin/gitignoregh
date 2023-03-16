@@ -21,6 +21,8 @@ Install with pip:
 pip install gitignoregh
 ```
 
+> Alias: `gigh`
+
 Upgrade with pip:
 ```sh
 pip install --upgrade gitignoregh
@@ -98,4 +100,17 @@ poetry run python -m scripts.tests-coverage
 Running cli using `poetry`:
 ```sh
 poetry run gitignoregh
+```
+
+## Release a new version
+
+> Check https://python-poetry.org/docs/cli/#version
+
+```shell
+poetry version <major|minor|patch>
+git add -A
+git commit -m "bumping version to $(poetry version -s)"
+git tag $(poetry version -s)
+git push origin main
+git push --tags
 ```
