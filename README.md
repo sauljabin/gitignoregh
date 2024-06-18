@@ -109,7 +109,7 @@ poetry run gitignoregh
 ```shell
 poetry version <major|minor|patch>
 git add -A
-git commit -m "bumping version to $(poetry version -s)"
+git commit -m "new version: $(poetry version -s)"
 git tag $(poetry version -s)
 git push origin main
 git push --tags
