@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gitignoregh"
-version = "1.1.5"
+version = "1.1.6"
 description = "gitignoregh is a command line tool that generates a .gitignore file for a project from the github gitignore templates repository"
 authors = ["Saúl Piña <sauljabin@gmail.com>"]
 license = "MIT"

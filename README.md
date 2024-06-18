@@ -18,12 +18,12 @@
 
 Install with pip:
 ```sh
-pip install gitignoregh
+pipx install gitignoregh
 ```
 
 Upgrade with pip:
 ```sh
-pip install --upgrade gitignoregh
+pipx upgrade gitignoregh
 ```
 
 ## Usage
@@ -69,7 +69,7 @@ gitignoregh java gradle
 
 Installing poetry:
 ```sh
-pip install poetry
+pipx install poetry
 ```
 
 Installing development dependencies:
