@@ -22,15 +22,15 @@ python = "^3.10"
 click = "^8"
 rich = "^13"
 GitPython = "^3"
-setuptools = "^68"
+setuptools = "^70"
 
 [tool.poetry.dev-dependencies]
-black = "^23"
+black = "^24"
 isort = "^5"
 bandit = "^1"
-Faker = "^20"
+Faker = "^25"
 coverage = {extras = ["toml"], version = "^7"}
-flake8 = "^6"
+flake8 = "^7"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
