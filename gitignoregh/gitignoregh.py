@@ -18,14 +18,10 @@ class Gitignoregh:
 
     def load_gitignore_files(self):
         for dirpath, dirnames, filenames in os.walk(self.repository.path):
-            filenames = [
-                filename for filename in filenames if filename.endswith(".gitignore")
-            ]
+            filenames = [filename for filename in filenames if filename.endswith(".gitignore")]
             filenames.sort()
             for gitignore_path in filenames:
-                self.gitignore_files.append(
-                    Gitignore(os.path.join(dirpath, gitignore_path))
-                )
+                self.gitignore_files.append(Gitignore(os.path.join(dirpath, gitignore_path)))
 
     def print_all_gitignore_files(self):
         self.print_gitignore_files(self.gitignore_files)
@@ -66,10 +62,7 @@ class Gitignoregh:
     def print_gitignore_files(self, gitignore_files):
         console = Console()
         columns = Columns(
-            [
-                "[purple]:arrow_forward:[/] {}".format(gitignore.id)
-                for gitignore in gitignore_files
-            ],
+            ["[purple]:arrow_forward:[/] {}".format(gitignore.id) for gitignore in gitignore_files],
             equal=True,
             expand=False,
         )
@@ -107,11 +100,7 @@ class Gitignore:
             self.text = file.read()
 
     def print(self):
-        console = Console()
-        console.print("[green]Name:[/]\t[magenta bold]{}[/]".format(self.file_name))
-        console.print("[green]Id:[/]\t[magenta bold]{}[/]".format(self.id))
-        console.rule()
-        console.print(self.text.replace("[", r"\["))
+        print(self.text)
 
     def save(self, file_append=None):
         if file_append:

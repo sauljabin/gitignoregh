@@ -21,7 +21,7 @@ jobs:
           pip install poetry
           poetry install
       - name: Run Tests
-        run: poetry run python -m scripts.tests-coverage
+        run: poetry run python -m scripts.coverage
       - name: Publish Coverage
         uses: codecov/codecov-action@v4
         with:

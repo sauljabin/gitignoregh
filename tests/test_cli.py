@@ -28,9 +28,7 @@ class TestCli(unittest.TestCase):
         gitignore_id = faker.word()
         self.cli.run(False, True, False, False, gitignore_id)
 
-        self.cli.gitignoregh.print_gitignore_files_by_id.assert_called_once_with(
-            gitignore_id
-        )
+        self.cli.gitignoregh.print_gitignore_files_by_id.assert_called_once_with(gitignore_id)
 
     def test_cli_print_gitignore_by_id(self):
         gitignore_id = faker.word()

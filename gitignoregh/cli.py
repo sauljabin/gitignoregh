@@ -37,9 +37,7 @@ class Cli:
 
 @click.command(context_settings={"help_option_names": ["-h", "--help"]})
 @click.option("--print", "-p", is_flag=True, help="Print a gitignore file.")
-@click.option(
-    "--search", "-s", is_flag=True, help="Search gitignore templates and shows a list."
-)
+@click.option("--search", "-s", is_flag=True, help="Search gitignore templates and shows a list.")
 @click.option("--list", "-l", is_flag=True, help="List all found gitignore templates.")
 @click.option("--reset", is_flag=True, help="Reset the template source.")
 @click.version_option(__version__)

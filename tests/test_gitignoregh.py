@@ -40,17 +40,6 @@ class TestGitignore(unittest.TestCase):
 
         self.assertEqual(self.gitignore.text, gitignore_text)
 
-    @patch("gitignoregh.gitignoregh.Console")
-    def test_print_gitignore_text(self, console_class_mock):
-        self.gitignore.text = faker.text()
-
-        console_mock = MagicMock()
-        console_class_mock.return_value = console_mock
-
-        self.gitignore.print()
-
-        console_mock.print.assert_called_with(self.gitignore.text)
-
     @patch("builtins.open", new_callable=mock_open)
     def test_save_gitignore_text(self, open_mock):
         self.gitignore.text = faker.text()
@@ -77,17 +66,6 @@ class TestGitignore(unittest.TestCase):
         )
 
         open_mock.assert_not_called()
-
-    @patch("gitignoregh.gitignoregh.Console")
-    def test_scape_arguments_when_printing_license_text(self, console_class_mock):
-        self.gitignore.text = "text [arg1] [arg2]"
-
-        console_mock = MagicMock()
-        console_class_mock.return_value = console_mock
-
-        self.gitignore.print()
-
-        console_mock.print.assert_called_with(r"text \[arg1] \[arg2]")
 
 
 class TestGitignoregh(unittest.TestCase):
@@ -140,9 +118,7 @@ class TestGitignoregh(unittest.TestCase):
 
         self.gitignoregh.print_gitignore_files_by_id(["spam"])
 
-        self.gitignoregh.print_gitignore_files.assert_called_once_with(
-            [gitignore1, gitignore2]
-        )
+        self.gitignoregh.print_gitignore_files.assert_called_once_with([gitignore1, gitignore2])
 
     @patch("gitignoregh.gitignoregh.Console")
     def test_print_gitignore_files_not_found(self, console_class_mock):

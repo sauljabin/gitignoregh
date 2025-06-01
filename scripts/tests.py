@@ -1,10 +1,12 @@
-import subprocess
-import sys
+from scripts import CommandProcessor
 
 
 def main():
-    unittest = subprocess.run(["poetry", "run", "python", "-m", "unittest", "-v"])
-    sys.exit(unittest.returncode)
+    init_commands = {
+        "tests": "poetry run python -m unittest -v",
+    }
+    command_processor = CommandProcessor(init_commands)
+    command_processor.run()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/sauljabin/gitignoregh",
+  "versions": [
+    {
+      "version": "Unreleased",
+      "changes": [
+        {
+          "type": "Fixed",
+          "entries": [
+            "Update dependencies version",
+            "Remove header when printing gitignore"
+          ]
+        }
+      ]
+    }
+  ]
+}

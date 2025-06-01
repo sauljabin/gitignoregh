@@ -1,15 +1,13 @@
-import subprocess
-import sys
+from scripts import CommandProcessor
 
 
 def main():
-    print(">>> black")
-    black = subprocess.run(["poetry", "run", "black", "."])
-
-    print(">>> isort")
-    isort = subprocess.run(["poetry", "run", "isort", "."])
-
-    sys.exit(black.returncode or isort.returncode)
+    init_commands = {
+        "black": "poetry run black . --preview",
+        "ruff": "poetry run ruff check . --fix",
+    }
+    command_processor = CommandProcessor(init_commands)
+    command_processor.run()
 
 
 if __name__ == "__main__":
