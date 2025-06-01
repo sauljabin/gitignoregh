@@ -60,12 +60,12 @@ gitignoregh -l
 
 Search gitignore templates files:
 ```sh
-gitignoregh -s
+gitignoregh -s <name>
 ```
 
 Print a gitignore:
 ```sh
-gitignoregh -p
+gitignoregh -p <name>
 ```
 
 Reset github template repository:
@@ -75,7 +75,7 @@ gitignoregh --reset
 
 Generate `.gitignore` file (accepts multiple arguments):
 ```sh
-gitignoregh java gradle
+gitignoregh <name>
 ```
 
 ## Development
@@ -107,7 +107,7 @@ poetry run python -m scripts.analyze
 
 Running code coverage:
 ```sh
-poetry run python -m scripts.tests-coverage
+poetry run python -m scripts.coverage
 ```
 
 Running cli using `poetry`:
