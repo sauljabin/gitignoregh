@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2025-11-06
+
 ### Fixed
 
 - Update python
@@ -18,5 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update dependencies version
 - Remove header when printing gitignore
 
-[Unreleased]: https://github.com/sauljabin/gitignoregh/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/sauljabin/gitignoregh/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/sauljabin/gitignoregh/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/sauljabin/gitignoregh/releases/tag/v1.2.0
