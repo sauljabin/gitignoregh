@@ -2,7 +2,15 @@
   "repository": "https://github.com/sauljabin/gitignoregh",
   "versions": [
     {
-      "version": "Unreleased"
+      "version": "Unreleased",
+      "changes": [
+        {
+          "type": "Fixed",
+          "entries": [
+            "Update python"
+          ]
+        }
+      ]
     },
     {
       "version": "1.2.0",
